@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CAAP Airports</title>
+  <link rel="stylesheet" href="{% static 'dist/css/styles_airports_area.css' %}">
+  <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
+    <script src="https://kit.fontawesome.com/51a06d85cb.js" crossorigin="anonymous"></script>
+</head>
+<body style="background-color:#92B5F3;"> 
+	<div class="backg">
+	<div class="content">		
+    <img src="{% static 'media/areas/luzon2.png' %}">
+	</div>
+	<div class="links">
+    <div id="Home">
+      <a href="/dashboard/airportmap" class="btn btn-app" style='font-size:15px'><i class="fa fa-map" aria-hidden="true" style='font-size:20px'></i> Home </a>
+    </div>
+
+		<div id="Legazpi">
+			<a href="#" data-toggle="modal" data-target="#modal-legazpi" style='font-size:15px'>Legazpi Airport   <i class="fas fa-plane-departure" aria-hidden="true" style='font-size:20px'></i></a>
+		</div>
+
+    <div id="Naga">
+      <a href="#" data-toggle="modal" data-target="#modal-naga" style='font-size:15px'>Naga Airport  <i class="fas fa-plane-departure" aria-hidden="true" style='font-size:20px'></i></a>
+    </div>
+
+    <div id="Virac">
+      <a href="#" data-toggle="modal" data-target="#modal-virac" style='font-size:15px'>Virac Airport   <i class="fas fa-plane-departure" aria-hidden="true" style='font-size:20px'></i></a>
+    </div>
+
+    <div id="Masbate">
+      <a href="#" data-toggle="modal" data-target="#modal-masbate" style='font-size:15px'> Masbate Airport  <i class="fas fa-plane-departure" aria-hidden="true" style='font-size:20px'></i></a>
+    </div>
+
+    <div id="Daet">
+      <a href="#" data-toggle="modal" data-target="#modal-daet" style='font-size:15px'>Daet Airport <i class="fas fa-plane-departure" aria-hidden="true" style='font-size:20px'></i></a>
+    </div>
+
+    <div id="Sorsogon">
+      <a href="#" data-toggle="modal" data-target="#modal-sorsogon" style='font-size:15px'>Sorsogon Airport  <i class="fas fa-plane-departure" aria-hidden="true" style='font-size:20px'></i></a>
+    </div>
+
+    <div id="Bulan">
+      <a href="#" data-toggle="modal" data-target="#modal-bulan" style='font-size:15px'> Bulan Airport  <i class="fas fa-plane-departure" aria-hidden="true" style='font-size:20px'></i></a>
+    </div>
+
+	
+	</div>
+
+</body>
+  
+</html>

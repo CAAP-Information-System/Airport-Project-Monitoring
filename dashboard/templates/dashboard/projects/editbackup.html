@@ -1,0 +1,338 @@
+{% extends "base_project.html" %}
+ 
+{% block title %}Add New  Project Records{% endblock title %}
+ 
+{% block content %}
+
+<head>
+   <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+   <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
+</head>
+
+{% if form.errors %}
+       {% for field in form %}
+           {% for error in field.errors %} 
+              <div class="alert alert-danger">
+                   <strong>{{ error|escape }} for {{ field.name}} </strong>
+              </div>
+           {% endfor %}
+       {% endfor %}
+    {% endif %}
+<div class="col-md-8">
+      
+ <form method="POST" action="/dashboard/project_update/{{ project.id }}" class="post-form">  
+   {% csrf_token %}  
+  <div class="container">  
+ <br>  
+  <div class="form-group row">  
+  <label class="col-sm-1 col-form-label"></label>  
+  <div class="col-sm-4">  
+  <h3>Update Details</h3>  
+  </div>  
+   </div>  
+
+  <div class="card card-primary">
+  <div class="card-header">
+  <h3 class="card-title">Airport Information</h3>
+  </div>
+  </div>
+  
+  <div class="card-body">
+
+  <div class="row">
+  <div class="col-md-6">
+  <div class="form-group "> 
+  <label class="col-sm-2 col-form-label">Location:</label>  
+  <div class="col-sm-4">  
+   <input type="text" class="form-control" name="location" id="id_loc" required maxlength="200" value="{{ project.location }}" />  
+  </div>  
+   </div>
+   <div class="form-group row">  
+  <label class="col-sm-2 col-form-label">Title:</label>  
+  <div class="col-sm-4"> 
+  <input type="text" class="form-control" name="title" id="id_title" required maxlength="200" value="{{ project.title }}" />
+  </div>  
+   </div>  
+  <div class="form-group row">  
+  <label class="col-sm-2 col-form-label">Description:</label>  
+  <div class="col-sm-6">  
+   <textarea id="summernote_desc" name="description" >{{ project.description|linebreaksbr }}</textarea>  
+  </div>  
+   </div>  
+  <div class="form-group row">  
+  <label class="col-sm-2 col-form-label">Funding Particulars:</label>  
+  <div class="col-sm-6">  
+   <textarea id="summernote_funding" name="fund_particulars">{{ project.fund_particulars }}</textarea>  
+  </div>  
+   </div>  
+   <div class="form-group row">  
+    <label class="col-sm-2 col-form-label">Contract Description:</label>  
+    <div class="col-sm-6">  
+     <textarea id="summernote_contdesc" name="contract_desc">{{ project.contract_desc }}</textarea> 
+    </div>  
+     </div>
+     <div class="form-group row">  
+      <label class="col-sm-2 col-form-label">Project Profile:</label>  
+      <div class="col-sm-6">  
+       <textarea id="summernote_profile" name="profile">{{ project.profile }}</textarea>  
+      </div>  
+       </div>
+    <div class="form-group row">  
+      <label class="col-sm-2 col-form-label">Project Status:</label>  
+      <div class="col-sm-6">  
+       <textarea id="summernote_status_desc" name="status_desc">{{ project.status_desc }}</textarea>
+      </div>  
+      </div>
+
+      <div class="form-group row">  
+      <label class="col-sm-2 col-form-label">Status:</label>  
+      <div class="col-sm-4">
+      <select name="status" class="custom-select form-control"  id="id_status">
+          <option>{{ project.status }}</option>  
+
+          <option value="Complete">Complete</option>
+          <option value="DED">DED</option>
+          <option value="On-Going">On-Going</option>
+          <option value="Others">Others</option>
+          <option value="Processing of POW & Plans">Processing of POW & Plans</option>
+          <option value="SAC">SAC</option>
+          <option value="Under Procurement">Under Procurement</option>
+          <option value="(Blanks)">(Blanks)</option>
+          
+        </select>
+        </div>  
+      </div>
+    <div class="form-group row">  
+      <label class="col-sm-2 col-form-label">Slippage:</label>  
+      <div class="col-sm-4">  
+        <select name="slippage" class="custom-select form-control"  id="id_slippage">
+          <option>{{ project.slippage }}</option>  
+
+          <option value="ANS">ANS</option>
+          <option value="Negative">Negative</option>
+          <option value="Positive">Positive</option>
+          <option value="Pending">Pending</option>
+          <option value="Terminated">Terminated</option>
+          <option value="Blanks">Blanks</option>
+          
+        </select>
+
+      </div>  
+      </div>
+      <div class="form-group row">  
+            <label class="col-sm-2 col-form-label">Contract Amount/ Budget:</label>  
+            <div class="col-sm-4">  
+               <input type="text" class="form-control" name="amount" id="id_amount" required maxlength="1000" value="{{ project.amount }}" />  
+            </div>  
+            </div>
+      <div class="form-group row">  
+        <label class="col-sm-2 col-form-label">Agency:</label>  
+        <div class="col-sm-4">  
+           <select name="agency" class="custom-select form-control"  id="id_agency">
+              <option>{{ project.agency }}</option>  
+
+          <option value="CAAP APP 2017">CAAP APP 2017</option>
+          <option value="CAAP APP 2018">CAAP APP 2018</option>
+          <option value="CAAP APP 2019">CAAP APP 2019</option>
+          <option value="CAAP APP 2020">CAAP APP 2020</option>
+          <option value="CAAP APP 2021">CAAP APP 2021</option>
+          <option value="CAAP APP 2022">CAAP APP 2022</option>
+          <option value="CAAP APP 2023">CAAP APP 2017</option>
+          <option value="DOTr GAA 2015 (Downloaded)">DOTr GAA 2015 (Downloaded)</option>
+          <option value="DOTr GAA 2016 (Downloaded)">DOTr GAA 2016 (Downloaded)</option>
+          <option value="DOTr GAA 2017 (Downloaded)">DOTr GAA 2017 (Downloaded)</option>
+          <option value="DOTr GAA 2018 (Downloaded)">DOTr GAA 2018 (Downloaded)</option>
+          <option value="DOTr GAA 2021 (Downloaded)">DOTr GAA 2021 (Downloaded)</option>
+          <option value="DOTr GAA 2022 (Downloaded)">DOTr GAA 2022 (Downloaded)</option>
+          <option value="Blank">Blank</option>
+
+          
+        </select> 
+        </div>  
+        </div>
+        <div class="form-group row">  
+          <label class="col-sm-2 col-form-label">Area:</label>  
+          <div class="col-sm-4">  
+            <select name="area" class="custom-select form-control"  id="id_area">
+              <option>{{ project.area }}</option>  
+
+          <option value="area 1">area 1</option>
+          <option value="area 2">area 2</option>
+          <option value="area 3">area 3</option>
+          <option value="area 4">area 4</option>
+          <option value="area 5">area 5</option>
+          <option value="area 6">area 6</option>
+          <option value="area 7">area 7</option>
+          <option value="area 8">area 8</option>
+          <option value="area 9">area 9</option>
+          <option value="area 10">area 10</option>
+          <option value="area 11">area 11</option>
+          <option value="area 12">area 12</option>
+          <option value="CATC">CATC</option>
+          <option value="Head Office">Head Office</option>
+          <option value="Blank">Blank</option>
+
+          
+        </select>
+          </div>  
+          </div>
+          
+            <div class="form-group row">  
+              <label class="col-sm-2 col-form-label">Region:</label>  
+              <div class="col-sm-4">  
+                 <select name="region" class="custom-select form-control"  id="id_region"> 
+                 <option>{{ project.region }}</option>  
+
+          <option value="Region 1">Region 1</option>
+          <option value="Region 2">Region 2</option>
+          <option value="Region 3">Region 3</option>
+          <option value="Region 4.A">Region 4.A</option>
+          <option value="Region 4.B">Region 4.B</option>
+          <option value="Region 5">Region 5</option>
+          <option value="Region 6">Region 6</option>
+          <option value="Region 7">Region 7</option>
+          <option value="Region 8">Region 8</option>
+          <option value="Region 9">Region 9</option>
+          <option value="Region 10">Region 10</option>
+          <option value="Region 11">Region 11</option>
+          <option value="Region 12">Region 12</option>
+          <option value="Region 12/BARMM">Region 12/BARMM</option>
+          <option value="CARAGA (Region 13)">CARAGA (Region 13)</option>
+          <option value="Blank">Blank</option>
+
+        </select> 
+              </div>  
+              </div>
+              <div class="form-group row">  
+                <label class="col-sm-2 col-form-label">Certificate:</label>  
+                <div class="col-sm-4">  
+                   <select name="certificate" class="custom-select form-control"  id="id_certificate">
+                   <option>{{ project.certificate }}</option>  
+
+          <option value="w/ Certificate of Final Acceptance">w/ Certificate of Final Acceptance</option>
+          <option value="w/ Certificate of Final Completion">w/ Certificate of Final Completion</option>
+          <option value="w/o Certificate">w/o Certificate</option>
+          <option value="Blank">Blank</option>
+
+          
+          
+        </select>   
+                </div>  
+                </div>
+                <div class="form-group row">  
+                  <label class="col-sm-2 col-form-label">Recouped Ad. Payment:</label>  
+                  <div class="col-sm-4">  
+                     <select name="recouped_pay" class="custom-select form-control"  id="id_recouped_pay"> 
+                      <option>{{ project.recouped_pay }}</option>  
+
+          <option value="Done">Done</option>
+          <option value="None">None</option>
+          <option value="Processing">Processing</option>
+          <option value="Blank">Blank</option>
+        </select>
+                  </div>  
+                  </div>
+                
+          <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Progress:</label>
+        <div class="col-sm-4">  
+        <input type="text" id="mySlider" name="progress" class="form-control" value="{{ project.progress }}"></input>
+      </div>
+
+  <div class="form-group row">  
+  <label class="col-sm-1 col-form-label"></label>  
+  <div class="col-sm-4">  
+  <button type="submit" class="btn btn-success btn-lg">Update</button>  
+  </div>  
+   </div>  
+  </div>  
+ </form> 
+
+  <script>
+    $(document).ready(function () {
+    $("#mySlider").ionRangeSlider({
+      min: 0,
+      max: 100,
+      from: 0,
+      step: 1,
+      prefix: ""
+    });
+  });
+
+      $('#summernote_funding').summernote({
+        placeholder: 'Input Funding Particulars',
+        tabsize: 2,
+        height: 120,
+        toolbar: [
+          ['style', ['style']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['table', ['table']],
+          ['insert', ['link', 'picture', 'video']],
+          ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+      });
+
+      $('#summernote_contdesc').summernote({
+        placeholder: 'Hello stand alone ui',
+        tabsize: 2,
+        height: 120,
+        toolbar: [
+          ['style', ['style']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['table', ['table']],
+          ['insert', ['link', 'picture', 'video']],
+          ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+      });
+
+      $('#summernote_desc').summernote({
+        placeholder: 'Hello stand alone ui',
+        tabsize: 2,
+        height: 120,
+        toolbar: [
+          ['style', ['style']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['table', ['table']],
+          ['insert', ['link', 'picture', 'video']],
+          ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+      });
+
+      $('#summernote_profile').summernote({
+        placeholder: 'Hello stand alone ui',
+        tabsize: 2,
+        height: 120,
+        toolbar: [
+          ['style', ['style']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['table', ['table']],
+          ['insert', ['link', 'picture', 'video']],
+          ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+      });
+
+      $('#summernote_status_desc').summernote({
+        placeholder: 'Hello stand alone ui',
+        tabsize: 2,
+        height: 120,
+        toolbar: [
+          ['style', ['style']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['table', ['table']],
+          ['insert', ['link', 'picture', 'video']],
+          ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+      });
+    </script> 
+{% endblock content %}   

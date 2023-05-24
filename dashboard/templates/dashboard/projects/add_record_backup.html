@@ -1,0 +1,225 @@
+{% extends "base_project.html" %}
+{% load static %}
+
+{% block title %}Add New Employee Records{% endblock title %}
+
+{% block content %}
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" />
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css" />
+    <link rel="stylesheet" href="{% static 'dist/css_projects/add_record.css' %}">
+  <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+  <script src="summernote-templates.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+   <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>
+</head>
+<style>
+  #mySlider {
+    width: 80%;
+    margin: 0 auto;
+  }
+</style>
+<div class="col-md-12">
+  <h4 class= 'test'>test</h4>
+
+  <form method="POST" class="post-form" action="/dashboard/addnew">
+    {% csrf_token %}
+    <div class="container-fluid">
+      <br>
+      <div class="form-group row">
+        <label class="col-sm-1 col-form-label"></label>
+        <div class="col-sm-4">
+          <h3>Enter Details</h3>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Location:</label>
+        <div class="col-sm-4">
+          {{ form.location }}
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Title:</label>
+        <div class="col-sm-4">
+          {{ form.title }}
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Description:</label>
+        <textarea id="summernote_desc" name="description">{{ project.description }}</textarea>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Funding Particulars:</label>
+        <textarea id="summernote_funding" name="fund_particulars">{{ project.fund_particulars }}</textarea>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">CONTRACT DESCRIPTION:</label>
+        <textarea id="summernote_contdesc" name="contract_description">{{ project.contract_desc }}</textarea>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">PROJECT PROFILE:</label>
+        <textarea id="summernote_projprofile" name="project_profile">{{ project.profile }}</textarea>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">PROJECT STATUS:</label>
+        <textarea id="summernote_status_desc" name="status_desc">{{ project.status_desc }}</textarea>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">STATUS:</label>
+        <div class="col-sm-4">
+          {{ form.status }}
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Slippage:</label>
+        <div class="col-sm-4">
+          {{ form.slippage }}
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Contract Amount/ Budget:</label>
+        <div class="col-sm-4">
+          {{ form.amount }}
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Agency:</label>
+        <div class="col-sm-4">
+          {{ form.agency }}
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Area:</label>
+        <div class="col-sm-4">
+          {{ form.area }}
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Region:</label>
+        <div class="col-sm-4">
+          {{ form.region }}
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Certificate:</label>
+        <div class="col-sm-4">
+          {{ form.certificate }}
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Recouped Ad. Payment:</label>
+        <div class="col-sm-4">
+          {{ form.recouped_pay }}
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Progress:</label>
+        <div id="mySlider">{{ form.progress }}</div>
+      </div>
+
+
+      <div class="form-group row">
+        <label class="col-sm-1 col-form-label"></label>
+        <div class="col-sm-4">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+
+
+    </div>
+  </form>
+</div>
+<script>
+  $(document).ready(function () {
+    $("mySlider").ionRangeSlider({
+      min: 0,
+      max: 100,
+      from: 0,
+      step: 1,
+      prefix: ""
+    });
+  });
+
+$('#summernote_funding').summernote({
+        placeholder: 'Input Funding Particulars',
+        tabsize: 2,
+        height: 120,
+        toolbar: [
+          ['style', ['style']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['table', ['table']],
+          ['insert', ['link', 'picture', 'video']],
+          ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+      });
+
+$('#summernote_contdesc').summernote({
+        placeholder: 'Input Contract Description',
+        tabsize: 2,
+        height: 120,
+        toolbar: [
+          ['style', ['style']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['table', ['table']],
+          ['insert', ['link', 'picture', 'video']],
+          ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+      });
+
+$('#summernote_desc').summernote({
+        placeholder: 'Input Description',
+        tabsize: 2,
+        height: 120,
+        toolbar: [
+          ['style', ['style']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['table', ['table']],
+          ['insert', ['link', 'picture', 'video']],
+          ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+      });
+
+$('#summernote_projprofile').summernote({
+        placeholder: 'Input Project Profile',
+        tabsize: 2,
+        height: 120,
+        toolbar: [
+          ['style', ['style']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['table', ['table']],
+          ['insert', ['link', 'picture', 'video']],
+          ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+      });
+
+$('#summernote_status_desc').summernote({
+        placeholder: 'Input Project Status',
+        tabsize: 2,
+        height: 120,
+        toolbar: [
+          ['style', ['style']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['table', ['table']],
+          ['insert', ['link', 'picture', 'video']],
+          ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+      });
+</script>
+
+{% endblock content %}

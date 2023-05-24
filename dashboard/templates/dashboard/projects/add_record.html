@@ -1,0 +1,436 @@
+{% extends "base_project.html" %}
+{% load static %}
+
+{% block title %}Add New Employee Records{% endblock title %}
+
+{% block content %}
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css"/>
+  <link rel="stylesheet" href="{% static 'dist/css_projects/add_record.css' %}">
+  <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+  <script src="summernote-templates.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+   <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>
+</head>
+<style>
+  #mySlider {
+    width: 200%;
+    padding: 2vh;
+  }
+
+  .container{
+    margin-left: 40vh;
+  }
+  .submit{
+    margin-left: 50vh;
+  }
+  }
+</style>
+<div class="flexbox">
+<div class="content">
+<div class="col-md-6">
+
+
+  <form method="POST" class="form" action="/dashboard/addnew">
+    {% csrf_token %}
+    <div class="container">  
+  <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">Airport Information</h3>
+
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                <i class="fas fa-minus"></i>
+              </button>
+              <button type="button" class="btn btn-tool" data-card-widget="remove">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group ">
+                  <label>Location</label>                  
+                  <input type="text" class="form-control" name="location" id="id_loc" required maxlength="200"/> 
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group ">
+                  <label>Title</label>                  
+                  
+                  <input type="text" class="form-control" name="title" id="id_title" required maxlength="200"/>
+                </div>
+              </div>
+            </div>
+            <!-- /.row -->
+        </div>
+    </div>
+
+
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">Runway Information</h3>
+
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                <i class="fas fa-minus"></i>
+              </button>
+              <button type="button" class="btn btn-tool" data-card-widget="remove">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+            
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group ">
+                  <label>Description</label>    
+                  <textarea id="summernote_desc" name="description"></textarea>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group ">
+                  <label>Funding Particulars</label>     
+                  <textarea id="summernote_funding" name="fund_particulars"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group ">
+                  <label>Contract Description</label>    
+                  <textarea id="summernote_contdesc" name="contract_desc"></textarea>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group ">
+                  <label>Project Profile</label>     
+                  <textarea id="summernote_projprofile" name="profile"></textarea> 
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group ">
+                  <label>Project Status</label>    
+                  <textarea id="summernote_status_desc" name="status_desc"></textarea>
+                </div>
+              </div>
+              
+
+            <!-- /.row -->
+            </div>
+        </div>
+        </div>
+
+
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">Taxiway Information</h3>
+
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                <i class="fas fa-minus"></i>
+              </button>
+              <button type="button" class="btn btn-tool" data-card-widget="remove">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+
+            
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group ">
+                  <label>Status</label>                  
+                  
+          <select name="status" class="custom-select form-control"  id="id_status">
+          <option></option>  
+
+          <option value="Complete">Complete</option>
+          <option value="DED">DED</option>
+          <option value="On-Going">On-Going</option>
+          <option value="Others">Others</option>
+          <option value="Processing of POW & Plans">Processing of POW & Plans</option>
+          <option value="SAC">SAC</option>
+          <option value="Under Procurement">Under Procurement</option>
+          <option value="(Blanks)">(Blanks)</option>
+          </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group ">
+                  <label>Slippage</label>                  
+                  
+          <select name="slippage" class="custom-select form-control"  id="id_slippage">
+          <option></option>  
+
+          <option value="ANS">ANS</option>
+          <option value="Negative">Negative</option>
+          <option value="Positive">Positive</option>
+          <option value="Pending">Pending</option>
+          <option value="Terminated">Terminated</option>
+          <option value="Blanks">Blanks</option>
+          </select>
+                </div>
+              </div>
+            </div>
+            <!-- /.row -->
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group ">
+                  <label>Contract Amount/ Budget</label>                  
+                  
+                  <input type="text" class="form-control" name="amount" id="id_amount" required maxlength="1000" />   
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group ">
+                  <label>Agency</label>                  
+                  
+                  <select name="agency" class="custom-select form-control"  id="id_agency">
+              <option></option>  
+
+          <option value="CAAP APP 2017">CAAP APP 2017</option>
+          <option value="CAAP APP 2018">CAAP APP 2018</option>
+          <option value="CAAP APP 2019">CAAP APP 2019</option>
+          <option value="CAAP APP 2020">CAAP APP 2020</option>
+          <option value="CAAP APP 2021">CAAP APP 2021</option>
+          <option value="CAAP APP 2022">CAAP APP 2022</option>
+          <option value="CAAP APP 2023">CAAP APP 2017</option>
+          <option value="DOTr GAA 2015 (Downloaded)">DOTr GAA 2015 (Downloaded)</option>
+          <option value="DOTr GAA 2016 (Downloaded)">DOTr GAA 2016 (Downloaded)</option>
+          <option value="DOTr GAA 2017 (Downloaded)">DOTr GAA 2017 (Downloaded)</option>
+          <option value="DOTr GAA 2018 (Downloaded)">DOTr GAA 2018 (Downloaded)</option>
+          <option value="DOTr GAA 2021 (Downloaded)">DOTr GAA 2021 (Downloaded)</option>
+          <option value="DOTr GAA 2022 (Downloaded)">DOTr GAA 2022 (Downloaded)</option>
+          <option value="Blank">Blank</option>
+          </select> 
+                </div>
+              </div>
+              </div>
+          <div class="row">
+              <div class="col-md-6">
+                <div class="form-group ">
+                  <label>Area</label>                  
+                  
+                  <select name="area" class="custom-select form-control"  id="id_area">
+              <option></option>  
+
+          <option value="area 1">AREA 1</option>
+          <option value="area 2">AREA 2</option>
+          <option value="area 3">AREA 3</option>
+          <option value="area 4">AREA 4</option>
+          <option value="area 5">AREA 5</option>
+          <option value="area 6">AREA 6</option>
+          <option value="area 7">AREA 7</option>
+          <option value="area 8">AREA 8</option>
+          <option value="area 9">AREA 9</option>
+          <option value="area 10">AREA 10</option>
+          <option value="area 11">AREA 11</option>
+          <option value="area 12">AREA 12</option>
+          <option value="CATC">CATC</option>
+          <option value="Head Office">Head Office</option>
+          <option value="Blank">Blank</option>
+
+          
+        </select>
+                </div>
+              </div>
+            
+            
+              <div class="col-md-6">
+                <div class="form-group ">
+                  <label>Region</label>                  
+                  
+                  <select name="region" class="custom-select form-control"  id="id_region"> 
+                 <option></option>  
+
+          <option value="Region 1">Region 1</option>
+          <option value="Region 2">Region 2</option>
+          <option value="Region 3">Region 3</option>
+          <option value="Region 4.A">Region 4.A</option>
+          <option value="Region 4.B">Region 4.B</option>
+          <option value="Region 5">Region 5</option>
+          <option value="Region 6">Region 6</option>
+          <option value="Region 7">Region 7</option>
+          <option value="Region 8">Region 8</option>
+          <option value="Region 9">Region 9</option>
+          <option value="Region 10">Region 10</option>
+          <option value="Region 11">Region 11</option>
+          <option value="Region 12">Region 12</option>
+          <option value="Region 12/BARMM">Region 12/BARMM</option>
+          <option value="CARAGA (Region 13)">CARAGA (Region 13)</option>
+          <option value="Blank">Blank</option>
+
+        </select> 
+                </div>
+              </div>
+            </div>
+              <div class="row">
+              <div class="col-md-6">
+                <div class="form-group ">
+                  <label>Certificate</label>                  
+                  
+                  <select name="certificate" class="custom-select form-control"  id="id_certificate">
+                   <option></option>  
+
+          <option value="w/ Certificate of Final Acceptance">w/ Certificate of Final Acceptance</option>
+          <option value="w/ Certificate of Final Completion">w/ Certificate of Final Completion</option>
+          <option value="w/o Certificate">w/o Certificate</option>
+          <option value="Blank">Blank</option>
+          </select>
+                </div>
+              </div>
+            
+              <div class="col-md-6">
+                <div class="form-group ">
+                  <label>Recouped Ad. Payment</label>                  
+                  
+          <select name="recouped_pay" class="custom-select form-control"  id="id_recouped_pay"> 
+          <option></option>  
+
+          <option value="Done">Done</option>
+          <option value="None">None</option>
+          <option value="Processing">Processing</option>
+          <option value="Blank">Blank</option>
+        </select>
+                </div>
+              </div>
+              </div>
+              <div class="row">
+          <div class="col-md-6">
+                <div class="form-group ">
+                  <label>Progress</label>                  
+                  
+                  <input type="text" id="mySlider" name="progress" class="form-control"></input>
+                </div>
+              </div>
+          </div>
+            </div>
+
+            <!-- /.row -->
+
+            </div>
+        </div>
+        
+        <div class="submit">
+        <div class="form-group row">
+          <label class="col-sm-8 col-form-label"></label>
+          <div class="col-sm-4">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+        </div>
+      </div>
+</fieldset>
+
+    </div>
+  </form>
+</div>
+<script>
+  $(document).ready(function () {
+    $('#mySlider').ionRangeSlider({
+      min     : -50,
+      max     : 50,
+      from    : 0,
+      type    : 'single',
+      step    : 1,
+      postfix : '°',
+      prettify: false,
+      hasGrid : true
+    })
+  });
+
+$('#summernote_funding').summernote({
+        placeholder: 'Input Funding Particulars',
+        tabsize: 2,
+        height: 120,
+        toolbar: [
+          ['style', ['style']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['table', ['table']],
+          ['insert', ['link', 'picture', 'video']],
+          ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+      });
+
+$('#summernote_contdesc').summernote({
+        placeholder: 'Input Contract Description',
+        tabsize: 2,
+        height: 120,
+        toolbar: [
+          ['style', ['style']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['table', ['table']],
+          ['insert', ['link', 'picture', 'video']],
+          ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+      });
+
+$('#summernote_desc').summernote({
+        placeholder: 'Input Description',
+        tabsize: 2,
+        height: 120,
+        toolbar: [
+          ['style', ['style']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['table', ['table']],
+          ['insert', ['link', 'picture', 'video']],
+          ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+      });
+
+$('#summernote_projprofile').summernote({
+        placeholder: 'Input Project Profile',
+        tabsize: 2,
+        height: 120,
+        toolbar: [
+          ['style', ['style']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['table', ['table']],
+          ['insert', ['link', 'picture', 'video']],
+          ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+      });
+
+$('#summernote_status_desc').summernote({
+        placeholder: 'Input Project Status',
+        tabsize: 2,
+        height: 120,
+        toolbar: [
+          ['style', ['style']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['table', ['table']],
+          ['insert', ['link', 'picture', 'video']],
+          ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+      });
+</script>
+
+{% endblock content %}

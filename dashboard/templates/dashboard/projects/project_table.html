@@ -1,0 +1,115 @@
+{% extends "base_project.html" %}
+{% load static %}
+{% block title %}Airport Project Records{% endblock title %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'dist/css_projects/project-table.css' %}">
+</head>
+
+<body>
+  <div class="main">
+    <div class="section-block">
+      <section class="project-sect1">
+        <div class="card">
+          <table class="card-table">
+            <thead>
+              <tr>
+                <th>ID #</th>
+                <th>Title</th>
+                <th style="text-align: left;">Project Name</th>
+                <th>Project Progress</th>
+                <th>Current Status</th>
+                <th>Action</th>
+              </tr>
+            </thead> 
+            <tbody>
+              {% for project in projects %}
+              <tr>
+                <!-- ID NUMBER -->
+                <td class="pid">{{ project.id|linebreaksbr }}</td>
+
+                <!-- ID TITLE -->
+                <td class="pid">{{ project.title|linebreaksbr }}</td>
+
+                <!-- PROJECT NAME -->
+                
+                <td class="pname"><a  class="pname-link" href="view/{{ project.id }} "> {{ project.description|linebreaksbr}}</a></td>
+                <!-- PROJECT PROGRESS -->
+                <td class="">
+                  <div id="" class="progress progress-sm">
+                    <!-- change color based on percentage -->
+                    {% if project.progress >= 90 and project.progress <= 100 %}
+                      <div class="progress-bar bg-green" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width: {{ project.progress }}%">
+                      </div>
+                    {% endif %}
+                    {% if project.progress >= 75 and project.progress <= 89  %}
+                      <div class="progress-bar" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width: {{ project.progress }}%">
+                      </div>
+                    {% endif %}
+                    {% if project.progress >= 30 and project.progress <= 74  %}
+                      <div class="progress-bar bg-yellow" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width: {{ project.progress }}%">
+                      </div>
+                    {% endif %}
+                    {% if project.progress >= 0 and project.progress <= 29 %}
+                      <div class="progress-bar bg-red" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width: {{ project.progress }}%">
+                      </div>
+                    {% endif %}
+                  </div>
+                  <p>{{ project.progress }}% Complete</p>
+
+                </td>
+           
+                {% if "Project completed" in project.status or "Completed" in project.status %}
+                <td class="pstatus"><span class="stat" style="background-color:#338534; color: white;"> Complete </span></td>
+
+                {% elif "On- going" in project.status %}
+                <td class="pstatus"><span class="stat" style="background-color:#1583A0; color: white;">On-Going</span></td>
+                {% elif "SAC" in project.status %}
+                <td class="pstatus"><span class="stat" style="background-color:#F5A82A; color: #3E3E3E;">&nbsp;&nbsp;&nbsp; SAC &nbsp;&nbsp;&nbsp;</span></td>
+                {% elif "under procurement" in project.status or "Under procurement" in project.status %}
+                <td class="pstatus"><span class="stat" style="background-color:#F04646; color: #fff;"> Under procurement</span></td>
+                {% else %}
+                <td class="pstatus"><span id="" class="stat" style="background-color:#716F6F; color: #fff;">{{ project.status }}</span></td>
+
+                {% endif %}
+                <td class="paction">
+                  <p data-placement="top" data-toggle="tooltip" title="Edit">
+                    <a href="/dashboard/edit/{{ project.id }}" class="btn btn-info btn-s" >
+                      <span class="fa fa-edit"> Edit</span>
+                    </a>
+                  </p>
+                  <p data-placement="top" data-toggle="tooltip" title="View">
+                    <a href="/dashboard/view/{{ project.id }}" class="btn btn-success btn-s" >
+                      <span class="fa fa-folder"> View</span>
+                    </a>
+                  </p>
+                  <!-- <p data-placement="top" data-toggle="tooltip" title="Delete">
+                    <a href="/delete/{{ project.id }}" class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete">
+                      <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+                  </p> -->
+                </td>  
+
+
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </section>
+    
+    </div>
+  </div>
+
+</body>
+
+</html>
+
+{% endblock content %}
